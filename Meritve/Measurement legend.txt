@@ -1,0 +1,33 @@
+meritev1_elastika_2_3 =		 s1_1d.mat = Aljaz, elastika1
+meritev1_zdravostanje_2_3 =	 s2_1d.mat = Patricija, brez
+meritev2_elastika_2_3 = 	 s3_1d.mat = Tina, elastika1
+meritev2_zdravostanje_2_3 = 	 s4_1d.mat = Aljaz, brez
+meritev3_elastika_2_3 = 	 s5_1d.mat = Patricija, elastika1
+meritev3_elastika2_9_3 = 	 s6_1d.mat = Tina, elastika2
+meritev3_zdravostanje_2_3 =	 s7_1d.mat = Tina, brez
+meritev4_elastika2_9_3 = 	 s8_1d.mat = Aljaz, elastika2
+				 s9_1d.mat = Ana, brez
+
+Meritve od Eve:
+
+s1_10.mat = zdrava =             s10_1d.mat
+s1_20.mat = zdrava =		 s10_2d.mat				
+s1_30.mat = zdrava =		 s10_3d.mat
+s2_10.mat = zdrava =		 s11_1d.mat
+s2_20.mat = zdrava =		 s11_2d.mat
+s2_30.mat = zdrava =		 s11_3d.mat
+s4_10.mat = zdrava =		 s12_1d.mat
+s4_20.mat = zdrava =		 s12_2d.mat
+s4_30.mat = zdrava =		 s12_3d.mat
+s27_20.mat = prizadet desni ud = s13_2d.mat		 
+s27_30.mat = prizadet desni ud = s13_3d.mat
+s28_10.mat = prizadet desni ud = s14_1d.mat
+s28_20.mat = prizadet desni ud = s14_2d.mat
+s28_30.mat = prizadet desni ud = s14_3d.mat
+s36_10.mat = prizadet levi ud =  s15_1d.mat
+s36_20.mat = prizadet levi ud =  s15_2d.mat
+s36_30.mat = prizadet levi ud =  s15_3d.mat
+s37_10.mat = prizadet levi ud =  s16_1d.mat
+s37_20.mat = prizadet levi ud =  s16_2d.mat
+s37_30.mat = prizadet levi ud =  s16_3d.mat
+
