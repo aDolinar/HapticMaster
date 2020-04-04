@@ -1,13 +1,14 @@
-meritev1_elastika_2_3 =		 s1_1d.mat = Aljaz, elastika1
-meritev1_zdravostanje_2_3 =	 s2_1d.mat = Patricija, brez
-meritev2_elastika_2_3 = 	 s3_1d.mat = Tina, elastika1
-meritev2_zdravostanje_2_3 = 	 s4_1d.mat = Aljaz, brez
-meritev3_elastika_2_3 = 	 s5_1d.mat = Patricija, elastika1
-meritev3_elastika2_9_3 = 	 s6_1d.mat = Tina, elastika2
-meritev3_zdravostanje_2_3 =	 s7_1d.mat = Tina, brez
-meritev4_elastika2_9_3 = 	 s8_1d.mat = Aljaz, elastika2
-				 s9_1d.mat = Ana, brez
-
+			trenutna poimenovanja:			stara poimenovanja:
+meritev1_elastika_2_3 =		s1_3d.mat  = Aljaz, elastika1		s1_1d.mat
+meritev1_zdravostanje_2_3 =	s6_3d.mat  = Patricija, brez		s2_1d.mat
+meritev2_elastika_2_3 = 	s2_3d.mat  = Tina, elastika1		s3_1d.mat
+meritev2_zdravostanje_2_3 = 	s7_3d.mat  = Aljaz, brez		s4_1d.mat
+meritev3_elastika_2_3 = 	s3_3d.mat  = Patricija, elastika1	s5_1d.mat
+meritev3_elastika2_9_3 = 	s4_3d.mat  = Tina, elastika2		s6_1d.mat
+meritev3_zdravostanje_2_3 =	s8_3d.mat  = Tina, brez			s7_1d.mat	
+meritev4_elastika2_9_3 = 	s5_3d.mat  = Aljaz, elastika2		s8_1d.mat
+				s9_3d.mat  = Ana, brez			s9_1d.mat
+	
 Meritve od Eve:
 
 s1_10.mat = zdrava =             s10_1d.mat
