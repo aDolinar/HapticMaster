@@ -18,6 +18,7 @@ for sub_num = 1:no_subjects % stevilo oseb
             minimalna(sub_num,seg_num,itr) = min(hitrosti); % izracun minimalne hitrosti 3D matrika
             deviacija(sub_num,seg_num,itr) = std(hitrosti); % izracun std 3D matrika
             
+            
         end    
     end
 end
@@ -77,16 +78,30 @@ sub_num_bolni = round(3*rand() + 13);
 sub_num_zdravi = round(3*rand() + 6);
 itr = 2; 
 for gib_boxplot = 1:num_of_targets
-    
+    cela_dolzina = 3200;
+    odsek = 200;
     hitrosti_bolni = haptic_data(sub_num_bolni).damping(3).hand_speed_path(itr).M; %preberemo vrednosti bolne osebe iz haptic_data
-    cela_dolzina = length(hitrosti_bolni); % 3200
-    odsek = cela_dolzina/num_of_targets; % 200
+    %cela_dolzina = length(hitrosti_bolni); % 3200
+    %odsek = cela_dolzina/num_of_targets; % 200
     hitrosti_bolni_gib(:,gib_boxplot) = hitrosti_bolni(odsek*(gib_boxplot-1)+1:odsek*gib_boxplot);  
     
     hitrosti_zdravi = haptic_data(sub_num_zdravi).damping(3).hand_speed_path(itr).M; %preberemo vrednosti bolne osebe iz haptic_data
-    cela_dolzina = length(hitrosti_zdravi); % 3200
-    odsek = cela_dolzina/num_of_targets; % 200
+    %cela_dolzina = length(hitrosti_zdravi); % 3200
+    %odsek = cela_dolzina/num_of_targets; % 200
     hitrosti_zdravi_gib(:,gib_boxplot) = hitrosti_zdravi(odsek*(gib_boxplot-1)+1:odsek*gib_boxplot); 
+    
+    sile_leva_bolni = haptic_data(sub_num_bolni).damping(3).force_left_hand_path(itr).N;
+    sile_leva_bolni_gib(:,gib_boxplot) = sile_leva_bolni(odsek*(gib_boxplot-1)+1:odsek*gib_boxplot);
+    
+    sile_leva_zdravi = haptic_data(sub_num_zdravi).damping(3).force_left_hand_path(itr).N;
+    sile_leva_zdravi_gib(:,gib_boxplot) = sile_leva_zdravi(odsek*(gib_boxplot-1)+1:odsek*gib_boxplot);
+    
+    sile_desna_bolni = haptic_data(sub_num_bolni).damping(3).force_right_hand_path(itr).O;
+    sile_desna_bolni_gib(:,gib_boxplot) = sile_desna_bolni(odsek*(gib_boxplot-1)+1:odsek*gib_boxplot);
+    
+    sile_desna_zdravi = haptic_data(sub_num_zdravi).damping(3).force_right_hand_path(itr).O;
+    sile_desna_zdravi_gib(:,gib_boxplot) = sile_desna_zdravi(odsek*(gib_boxplot-1)+1:odsek*gib_boxplot);
+    
     
 end
 
@@ -99,3 +114,21 @@ title('hitrosti za posamezen segment - zdravi')
 subplot(2,1,2)
 boxplot(hitrosti_bolni_gib);
 title('hitrosti za posamezen segment - bolni')
+
+figure()
+set(gcf, 'Position', get(0, 'Screensize'));
+hold on
+subplot(2,2,1)
+boxplot(sile_leva_zdravi_gib);
+title('sile leve roke za posamezen segment - zdravi')
+subplot(2,2,2)
+boxplot(sile_leva_bolni_gib);
+title('sile leve roke za posamezen segment - bolni')
+
+subplot(2,2,3)
+boxplot(sile_desna_zdravi_gib);
+title('sile desne roke za posamezen segment - zdravi')
+subplot(2,2,4)
+boxplot(sile_desna_bolni_gib);
+title('sile desne roke za posamezen segment - bolni')
+
