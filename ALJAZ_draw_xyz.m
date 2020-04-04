@@ -1,6 +1,6 @@
 clc;close all; 
 load('haptic_data.mat');
-
+%oto
 t_norm=1:200;
 %%
 %GRAFI CELOTNE TRAJEKTORIJE Z(Y)
