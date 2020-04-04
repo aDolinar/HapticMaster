@@ -1,19 +1,19 @@
 %% Spreminjamo za posamezno iteracijo%%
-% [15] Pot do datoteke meritev: experiments_folder = dir('/*.mat'); % preberemo število .mat datotek
-% [28] Pot do FolderName = 'C:\Users\Anže\Desktop\Mag. naloga\02_Matlab_statistika_00\23_16_1\Measurements_14.1.19_extract';
-% no_damp_iterations = 3; % 3 velja le v primeru, da imamo za vsak objekt vedno 3 razliène damping-e
+% [15] Pot do datoteke meritev: experiments_folder = dir('/*.mat'); % preberemo ?tevilo .mat datotek
+% [28] Pot do FolderName = 'C:\Users\An?e\Desktop\Mag. naloga\02_Matlab_statistika_00\23_16_1\Measurements_14.1.19_extract';
+% no_damp_iterations = 3; % 3 velja le v primeru, da imamo za vsak objekt vedno 3 razli?ne damping-e
 
 %% Inicializacija
 clc; close all; clear all;
 % pot = 'C:\Users\ana\Desktop\FAKS\znanstveni seminar 2019_20\Ana\Meritve\haptic data - vsi skupaj[zdr,Dpar,Lpar]';
-pot = 'D:\Ales\Faks\4_letnik\HRI\stuff\Tue\Tue\HapticMaster\2019_Znanstveni_HSR_RM_HapticMaster\Matlab\Data Output';%'E:\PHD\3_ROBOT\Znanstveni seminar 2019 Ana\SUROVI PODATKI\haptic data - vsi skupaj[zdr,Dpar,Lpar]';
+pot = '.\Meritve';%'E:\PHD\3_ROBOT\Znanstveni seminar 2019 Ana\SUROVI PODATKI\haptic data - vsi skupaj[zdr,Dpar,Lpar]';
 
-% Število map v mapi --> subject_no_folder
-% experiments_folder = dir('C:\Users\Anže\Desktop\Mag. naloga\02_Matlab_statistika_00\23_16_1\Measurements_14.1.19');
+% ?tevilo map v mapi --> subject_no_folder
+% experiments_folder = dir('C:\Users\An?e\Desktop\Mag. naloga\02_Matlab_statistika_00\23_16_1\Measurements_14.1.19');
 % sum_subfolder = sum([experiments_folder(~ismember({experiments_folder.name},{'.','..'})).isdir]);
 
-% Število .mat datotek v mapi --> subject_no_folder
-no_damp_iterations = 3; % !!!PAZI!!! 3 velja le v primeru, da imamo za vsak objekt vedno 3 razliène damping-e
+% ?tevilo .mat datotek v mapi --> subject_no_folder
+no_damp_iterations = 3; % !!!PAZI!!! 3 velja le v primeru, da imamo za vsak objekt vedno 3 razli?ne damping-e
 no_subjects = 16;
 experiments_folder = dir([pot,'/*.mat']); %dir([pot,'/*.mat'])CHANGE
 
@@ -21,20 +21,20 @@ sum_subfolder = numel(experiments_folder) / no_damp_iterations;
 %addpath('C:\Users\ana\Desktop\znanstveni seminar 2019_20\Ana\Tools\interparc')
 
 % Po korakih polnimo strukturo haptic_data
-% Ugotovimo število objektov, ki smo jih merili (sum_subfolder)
-% Privzamemo, da imamo le tri razliène Damping vrednosti (0, 20, 40): damping_no_folder
+% Ugotovimo ?tevilo objektov, ki smo jih merili (sum_subfolder)
+% Privzamemo, da imamo le tri razli?ne Damping vrednosti (0, 20, 40): damping_no_folder
 % Izvedemo algoritem za vsak objekt za vse tri Damping vrednosti
-% !!PAZI!!: Èe se spremeni število Damping vrednosti, popravi vrednost 3 v
+% !!PAZI!!: ?e se spremeni ?tevilo Damping vrednosti, popravi vrednost 3 v
 % for zanki na pravo stevilo Damping vrednosti ter stevilo s katerim delis numel(experiments_folder)
 for subject_no_folder = 1:no_subjects
     for damping_no_folder = 3:no_damp_iterations
         FileName = ['s', num2str(subject_no_folder), '_', num2str(damping_no_folder), 'd.mat'];
         FolderName = pot;
         File = fullfile(FolderName, FileName);
-        sample = load(File); % Naložimo podatke
+        sample = load(File); % Nalo?imo podatke
 %         sample.data = data;
         
-        %Naložimo strukturo haptic_data      
+        %Nalo?imo strukturo haptic_data      
         if ~(subject_no_folder == 2 && damping_no_folder == 1)
             load('haptic_data.mat');
         end %this is usable if you use the proper naming scheme
@@ -46,8 +46,8 @@ for subject_no_folder = 1:no_subjects
         no_samples = 200; % definiramo za interparc funkcijo              
         
         % Dodamo poti do funkcij
-        addpath('D:\Ales\Faks\4_letnik\HRI\stuff\Vaje HM 2020\Vaje HM 2020\interparc')
-        
+        addpath('.\EvaFunkcije\interparc')
+        addpath('.\EvaFunkcije\Segmentacija')
         %% Filtriranje podatkov - nizkopasovni filter
         filter = designfilt('lowpassiir','FilterOrder',5, ...
             'HalfPowerFrequency',10, ...
@@ -59,12 +59,12 @@ for subject_no_folder = 1:no_subjects
             data(ii,:) = filtfilt(filter, sample.data(ii,:));
         end
         
-        %% Odrežemo odveène meritve na zaèetku in koncu (pred prvo in po zadnji tarèi) [36], [37]
+        %% Odre?emo odve?ne meritve na za?etku in koncu (pred prvo in po zadnji tar?i) [36], [37]
         [row,col] = find(diff(data(36,:)));
         
-        data = data(:,col(1):col(end)+1); % Dodana dodatna meritev, da se izriše zadnji col_target
+        data = data(:,col(1):col(end)+1); % Dodana dodatna meritev, da se izri?e zadnji col_target
         
-        %%  Matlab time [1] & Real time [28], odstranimo offset in postavimo zaèetni èas na 0
+        %%  Matlab time [1] & Real time [28], odstranimo offset in postavimo za?etni ?as na 0
         offset_matlab = data(1,1);
         offset_robot = data(28,1);
         for j=1:1:size(data,2)
@@ -72,10 +72,10 @@ for subject_no_folder = 1:no_subjects
             data(28,j) = data(28,j) - offset_robot;
         end
         
-        %% Ustvarimo strukturo za data_all: vsi podatki - filtrirani, odstranjen offset èasa, odrezani podatki na zaèetku in koncu
+        %% Ustvarimo strukturo za data_all: vsi podatki - filtrirani, odstranjen offset ?asa, odrezani podatki na za?etku in koncu
         haptic_data(subject_no).damping(damping_no).data_all = data;
         
-        %% Poišèemo odseke - col stolpce za repetition
+        %% Poi??emo odseke - col stolpce za repetition
         [row_repetition,col_repetition] = find(diff(data(37,:)));
         if length(col_repetition)<data(40,1) 
             col_repetition=[col_repetition (data(1,end)*200)];
@@ -83,7 +83,7 @@ for subject_no_folder = 1:no_subjects
             col_repetition=col_repetition(1:data(40,1));
         end
         %% Obdelujemo posamezne odseke ponovitev
-        % Loèevanje odsekov ponovitev(repetition_no), iskanje odsekov target triggerjev, iskanje minimuma znotraj odsekov target triggerjev
+        % Lo?evanje odsekov ponovitev(repetition_no), iskanje odsekov target triggerjev, iskanje minimuma znotraj odsekov target triggerjev
         for repetition_no = 1:data(40,1) % 40 vrstica, 1 stolpec - Number of repetitions
             startIndex = 0;
             if repetition_no == 1
@@ -125,7 +125,7 @@ for subject_no_folder = 1:no_subjects
             StartEnd_idx = zeros((data(39,1)-1),2);
             
             for target_no = 1:data(39,1) % 39 vrstica, 1 stolpec - Number of targets
-                target_vector = [1:2:length(col_target)]; % Pridobimo zaporedne številke s katerimi si pomagamo pri zapisu odseka Trigger after 3s + hitting the target
+                target_vector = [1:2:length(col_target)]; % Pridobimo zaporedne ?tevilke s katerimi si pomagamo pri zapisu odseka Trigger after 3s + hitting the target
                 target_interval = data(:,(startIndex+col_target(target_vector(target_no))):(startIndex+col_target(target_vector(target_no)+1))); % Pridobimo odsek signalov na posameznem odseku Trigger after 3s + hitting the target
                 
                 % hand_velocity & hand_speed na posameznem target_interval odseku
@@ -133,7 +133,7 @@ for subject_no_folder = 1:no_subjects
                 hand_speed = sqrt(hand_velocity(:,1).^2+hand_velocity(:,2).^2+hand_velocity(:,3).^2);
                 
                 % Uporabimo findpeaks funkcijo za iskanje minimuma
-                % Išèemo maximum inverza signala hitrosti na iskanem signalu - v resnici minimum
+                % I??emo maximum inverza signala hitrosti na iskanem signalu - v resnici minimum
                 inv_velocity = (1-hand_speed/max(hand_speed)).^3;
                 inv_velocity = inv_velocity/max(inv_velocity);
                 
@@ -143,9 +143,9 @@ for subject_no_folder = 1:no_subjects
                 else
                     [vel_pks,vel_locs] = findpeaks(inv_velocity);
                     
-                    % Išèemo col lokacijo minimuma na posameznem target_intervalu - col lokacija je podana globalno glede na podatke data (gledano od prvega sampla naprej)
+                    % I??emo col lokacijo minimuma na posameznem target_intervalu - col lokacija je podana globalno glede na podatke data (gledano od prvega sampla naprej)
                     [min_vel_pks idx] = max(vel_pks); % Dobimo indeks minimuma
-                    idx = vel_locs(idx) + startIndex + col_target(target_vector(target_no)); % Konèni indeks je sestavljen iz vsote: lokacija min na target_interval + vsi sampli od zaèetka + lokacija col_taget
+                    idx = vel_locs(idx) + startIndex + col_target(target_vector(target_no)); % Kon?ni indeks je sestavljen iz vsote: lokacija min na target_interval + vsi sampli od za?etka + lokacija col_taget
                     
                 end
                 
