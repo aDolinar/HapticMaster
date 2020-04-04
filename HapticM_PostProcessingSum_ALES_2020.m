@@ -360,7 +360,3 @@ for subject_no_folder = 1:no_subjects
         
     end
 end
-
-
-
-
