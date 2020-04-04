@@ -1,6 +1,6 @@
 clc;close all; 
 load('haptic_data.mat');
-%oto
+
 t_norm=1:200;
 %%
 %GRAFI CELOTNE TRAJEKTORIJE Z(Y)
@@ -42,9 +42,9 @@ for subject_no1=1:16
 %             figure()
 %             plot(trajY1,trajZ1,trajY2,trajZ2);
 %             title(['trajektorije od subjectov ', num2str(subject_no1),' in ', num2str(subject_no2)]);
-%             deltaTrajZ=trajZ1-trajZ2;
-%             deltaTrajY=trajY1-trajY2;
-%             distanceTraj=sqrt(power(deltaTrajZ,2)+power(deltaTrajY,2));
+             deltaTrajZ=trajZ1-trajZ2;
+             deltaTrajY=trajY1-trajY2;
+             distanceTraj=sqrt(power(deltaTrajZ,2)+power(deltaTrajY,2));
 %             figure()
 %             plot([1:3200],distanceTraj);
 %             title('odstopanje med potema');
