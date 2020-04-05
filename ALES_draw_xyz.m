@@ -81,7 +81,7 @@ end
 %GRAFI ZA HITROST
 for damping_no = 3:3
 %     close all
-    
+      
     for subject_no = 1:16
         
         for target_no = 1:16

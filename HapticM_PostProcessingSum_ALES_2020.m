@@ -35,7 +35,7 @@ for subject_no_folder = 1:no_subjects
 %         sample.data = data;
         
         %Nalo?imo strukturo haptic_data      
-        if ~(subject_no_folder == 2 && damping_no_folder == 1)
+       if ~(subject_no_folder == 2 && damping_no_folder == 1)
             load('haptic_data.mat');
         end %this is usable if you use the proper naming scheme
         
