@@ -3,7 +3,9 @@
 clc;
 close all;
 
+load('haptic_data.mat');
 num_of_targets = 16; % stevilo tarc
+no_subjects = 16;
 for sub_num = 1:no_subjects % stevilo oseb
     for itr = 1:2 % stevilo ponovitev (povsod sem vzela samo 2)
         for seg_num = 1:num_of_targets
