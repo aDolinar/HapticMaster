@@ -1,6 +1,6 @@
 clc;close all; 
 load('haptic_data.mat');
-
+damping_no=3;
 t_norm=1:200;
 %%
 %GRAFI CELOTNE TRAJEKTORIJE Z(Y)
@@ -30,6 +30,7 @@ end
 clc
 close all
 damping_no=3;
+
 for subject_no1=1:16
     for subject_no2=1:16
         if subject_no1==subject_no2
@@ -53,4 +54,43 @@ for subject_no1=1:16
         end
     end
 end
-euclidDistance
+%%
+%porazdeljenost pospesevanja
+clc
+for target_no=1:16
+    close all
+    for subject_no=1:16
+        idxStart=1+(target_no-1)*200;
+        idxEnd=idxStart+199;
+        trajY1=haptic_data(subject_no).damping(damping_no).position_y_path(1).U(idxStart:idxEnd);
+        trajZ1=haptic_data(subject_no).damping(damping_no).position_z_path(1).V(idxStart:idxEnd);
+        velY1=diff(trajY1);
+        velZ1=diff(trajZ1);
+        accY1=diff(velY1);
+        accZ1=diff(velZ1);
+        
+        trajY2=haptic_data(subject_no).damping(damping_no).position_y_path(2).U(idxStart:idxEnd);
+        trajZ2=haptic_data(subject_no).damping(damping_no).position_z_path(2).V(idxStart:idxEnd);
+        velY2=diff(trajY2);
+        velZ2=diff(trajZ2);
+        accY2=diff(velY2);
+        accZ2=diff(velZ2);
+        
+        figure()
+        %hold on
+        subplot(2,1,1);
+        plot([idxStart:idxEnd-2],accY1,[idxStart:idxEnd-2],accY2);
+        title("acc Y");
+        legend('repetition 1','repetition 2')
+        subplot(2,1,2);
+        plot([idxStart:idxEnd-2],accZ1,[idxStart:idxEnd-2],accZ2);
+        title("acc Z");
+        legend('repetition 1','repetition 2')
+        text=strcat("subject no: ",num2str(subject_no),", target no: ",num2str(target_no));
+        %text=["subject no: ",num2str(subject_no),", target no: ",num2str(target_no)];
+        sgtitle(text,'FontSize',14);
+        set(gcf, 'Position', get(0, 'Screensize'));
+        %hold off
+    end
+    pause
+end
