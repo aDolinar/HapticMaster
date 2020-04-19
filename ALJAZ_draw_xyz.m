@@ -39,15 +39,15 @@ for subject_no1=1:16
             trajZ1=haptic_data(subject_no1).damping(damping_no).position_z_path(1).V;
             trajY2=haptic_data(subject_no2).damping(damping_no).position_y_path(1).U;
             trajZ2=haptic_data(subject_no2).damping(damping_no).position_z_path(1).V;
-%             figure()
-%             plot(trajY1,trajZ1,trajY2,trajZ2);
-%             title(['trajektorije od subjectov ', num2str(subject_no1),' in ', num2str(subject_no2)]);
+             figure()
+             plot(trajY1,trajZ1,trajY2,trajZ2);
+             title(['trajektorije od subjectov ', num2str(subject_no1),' in ', num2str(subject_no2)]);
              deltaTrajZ=trajZ1-trajZ2;
              deltaTrajY=trajY1-trajY2;
              distanceTraj=sqrt(power(deltaTrajZ,2)+power(deltaTrajY,2));
-%             figure()
-%             plot([1:3200],distanceTraj);
-%             title('odstopanje med potema');
+             figure()
+             plot([1:3200],distanceTraj);
+             title('odstopanje med potema');
             euclidDistance(subject_no1,subject_no2)=sqrt((1/3200)*sum(power(distanceTraj,2)));
             %pause
         end
