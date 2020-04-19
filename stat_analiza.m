@@ -6,7 +6,7 @@ clc; close all;
 num_of_targets = 16; % stevilo tarc
 sub_num = 16;
 ime = fieldnames(haptic_data(sub_num).damping(3)); %imena vseh meritev v haptic data
-
+no_subjects= 16;
 
 for i = 3:length(ime) %zacnemo analizo sele pri tretji
     for sub_num = 1:no_subjects 
