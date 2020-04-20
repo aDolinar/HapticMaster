@@ -71,7 +71,7 @@ for damping_no = 3:3
                 ylabel('Force Ratio')
                 xlabel('Normalised time')
                 title(['subject = ', int2str(subject_no),', damping = ', int2str(damping_no), ', repetition = ', int2str(repetition_no), ', target = ', int2str(target_no)])
-                %pause
+                pause
                 
             end
         end
@@ -106,9 +106,9 @@ end
 for damping_no = 3:3
 %     close all
     
-    for subject_no = 1:16
+    for  target_no = 1:16
         
-        for target_no = 1:16
+        for subject_no = 1:16
             avg_speed = ((haptic_data(subject_no).damping(damping_no).hand_speed_path(1).M((target_no-1)*200+1:target_no*200))+(haptic_data(subject_no).damping(damping_no).hand_speed_path(2).M((target_no-1)*200+1:target_no*200)))/2;
             
             close all
@@ -199,6 +199,8 @@ end
 
 
 %GRAF POVPRECNE POTI zdravi vs ne-zdravi vs elastika
+avg_y_st = zeros(200,16,16);
+avg_z_st = avg_y_st;
 for damping_no = 3:3
 %     close all
     
@@ -216,28 +218,169 @@ for damping_no = 3:3
                 sum_y = sum_y + (haptic_data(subject_no).damping(damping_no).position_y_path(repetition_no).U((target_no-1)*200+1:target_no*200));
                 sum_z = sum_z + (haptic_data(subject_no).damping(damping_no).position_z_path(repetition_no).V((target_no-1)*200+1:target_no*200));
             end
+            avg_y_st(:,subject_no,target_no) = sum_y/repetition_no;
+            avg_z_st(:,subject_no,target_no) = sum_z/repetition_no;
+            
+            %plottanje
+            if subject_no <= 5
+                plot(t_norm,avg_y_st(:,subject_no,target_no),'color','b')
+                plot(t_norm,avg_z_st(:,subject_no,target_no),'color','b')
+            elseif subject_no <= 9
+                plot(t_norm,avg_y_st(:,subject_no,target_no),'color','g')
+                plot(t_norm,avg_z_st(:,subject_no,target_no),'color','g')
+            elseif subject_no <= 12
+                plot(t_norm,avg_y_st(:,subject_no,target_no),'color','k')
+                plot(t_norm,avg_z_st(:,subject_no,target_no),'color','k')
+            else
+                plot(t_norm,avg_y_st(:,subject_no,target_no),'color','r')
+                plot(t_norm,avg_z_st(:,subject_no,target_no),'color','r')
+            end
+            
+            legend();
+            set(gcf, 'Position', get(0, 'Screensize'));
+            title(['subject = ', int2str(subject_no),', damping = ', int2str(damping_no), ', target = ', int2str(target_no)])
+            pause
+        end
+    end
+end
+
+%GRAF POVPRECNE HITROSTI zdravi vs ne-zdravi vs elastika
+for damping_no = 3:3
+%     close all
+    
+    for target_no = 1:16
+        close all
+        figure()
+        ylabel('Distance @ handle [m]')
+        xlabel('Normalised time')
+        hold on
+        for subject_no = 1:16
+            %izracun povprecnih vredonsti
+            sum_y = zeros(size((haptic_data(subject_no).damping(damping_no).position_y_path(1).U((target_no-1)*200+1:target_no*200))));
+            for repetition_no = 1:(haptic_data(subject_no).damping(damping_no).data_all(40,1))
+                sum_y = sum_y + (haptic_data(subject_no).damping(damping_no).hand_speed_path(repetition_no).M((target_no-1)*200+1:target_no*200));
+            end
             avg_y = sum_y/repetition_no;
-            avg_z = sum_z/repetition_no;
             
             %plottanje
             if subject_no <= 5
                 plot(t_norm,avg_y,'color','b')
-                plot(t_norm,avg_z,'color','b')
             elseif subject_no <= 9
                 plot(t_norm,avg_y,'color','g')
-                plot(t_norm,avg_z,'color','g')
             elseif subject_no <= 12
-                plot(t_norm,avg_y,'color','y')
-                plot(t_norm,avg_z,'color','y')
+                plot(t_norm,avg_y,'color','k')
             else
                 plot(t_norm,avg_y,'color','r')
-                plot(t_norm,avg_z,'color','r')
             end
-                    
+            
+            legend();
             set(gcf, 'Position', get(0, 'Screensize'));
-            legend()
             title(['subject = ', int2str(subject_no),', damping = ', int2str(damping_no), ', target = ', int2str(target_no)])
             pause
         end
+    end
+end
+
+%GRAF POVPRECNE POTI vseh zdravih
+avg_y = zeros(200,16);
+avg_z = avg_y;
+for damping_no = 3:3
+%     close all
+    
+    for target_no = 1:16
+        close all
+        figure()
+        ylabel('Distance @ handle [m]')
+        xlabel('Normalised time')
+        set(gcf, 'Position', get(0, 'Screensize'));
+        hold on
+        
+        %izracun povprecnih vredonsti
+        sum_y = zeros(size((haptic_data(subject_no).damping(damping_no).position_y_path(1).U((target_no-1)*200+1:target_no*200))));
+        sum_z = sum_y;
+        n = 0;
+        for subject_no = 6:12
+            for repetition_no = 1:(haptic_data(subject_no).damping(damping_no).data_all(40,1))
+                sum_y = sum_y + (haptic_data(subject_no).damping(damping_no).position_y_path(repetition_no).U((target_no-1)*200+1:target_no*200));
+                sum_z = sum_z + (haptic_data(subject_no).damping(damping_no).position_z_path(repetition_no).V((target_no-1)*200+1:target_no*200));
+                n = n+1;
+            end
+        end
+        avg_y(:,target_no) = sum_y/n;
+        avg_z(:,target_no) = sum_z/n;
+        
+        plot(t_norm,avg_y(:,target_no))
+        plot(t_norm,avg_z(:,target_no))
+        legend('y position','z position')
+        title(['damping = ', int2str(damping_no), ', target = ', int2str(target_no)])
+        pause()
+    end
+end
+
+%GRAF POVPRECNE HITROSTI vseh zdravih
+for damping_no = 3:3
+%     close all
+    
+    for target_no = 1:16
+        close all
+        figure()
+        ylabel('Distance @ handle [m]')
+        xlabel('Normalised time')
+        set(gcf, 'Position', get(0, 'Screensize'));
+        hold on
+        
+        %izracun povprecnih vredonsti
+        sum = zeros(size((haptic_data(1).damping(damping_no).position_y_path(1).U((target_no-1)*200+1:target_no*200))));
+        n = 0;
+        for subject_no = 6:12
+            for repetition_no = 1:(haptic_data(subject_no).damping(damping_no).data_all(40,1))
+                sum = sum + (haptic_data(subject_no).damping(damping_no).hand_speed_path(repetition_no).M((target_no-1)*200+1:target_no*200));
+                n = n+1;
+            end
+        end
+        avg = sum/n;
+        
+        plot(t_norm,avg)
+        legend('avg speed')
+        title(['damping = ', int2str(damping_no), ', target = ', int2str(target_no)])
+        pause()
+    end
+end
+
+%ODSTOPANJE OD POVPRECNE POTI VSEH ZDRAVIH
+for damping_no = 3:3
+%     close all
+    
+    for target_no = 1:16
+        close all
+        figure()
+        ylabel('Distance @ handle [m]')
+        xlabel('Normalised time')
+        hold on
+        for subject_no = 1:16
+            errory = avg_y_st(:,subject_no,target_no)-avg_y(:,target_no);
+            errorz = avg_z_st(:,subject_no,target_no)-avg_z(:,target_no);
+            
+            %plottanje
+            if subject_no <= 5
+                plot(t_norm,errory,'color','b')
+                plot(t_norm,errorz,'color','b')
+            elseif subject_no <= 9
+                plot(t_norm,errory,'color','g')
+                plot(t_norm,errorz,'color','g')
+            elseif subject_no <= 12
+                plot(t_norm,errory,'color','k')
+                plot(t_norm,errorz,'color','k')
+            else
+                plot(t_norm,errory,'color','r')
+                plot(t_norm,errorz,'color','r')
+            end
+
+            legend();
+            set(gcf, 'Position', get(0, 'Screensize'));
+            title(['subject = ', int2str(subject_no),', damping = ', int2str(damping_no), ', target = ', int2str(target_no)])
+            
+        end
+        pause
     end
 end
