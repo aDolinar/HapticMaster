@@ -20,15 +20,89 @@ s2_30.mat = zdrava =		 s11_3d.mat
 s4_10.mat = zdrava =		 s12_1d.mat
 s4_20.mat = zdrava =		 s12_2d.mat
 s4_30.mat = zdrava =		 s12_3d.mat
-s27_20.mat = prizadet desni ud = s13_2d.mat		 
-s27_30.mat = prizadet desni ud = s13_3d.mat
-s28_10.mat = prizadet desni ud = s14_1d.mat
-s28_20.mat = prizadet desni ud = s14_2d.mat
-s28_30.mat = prizadet desni ud = s14_3d.mat
-s36_10.mat = prizadet levi ud =  s15_1d.mat
-s36_20.mat = prizadet levi ud =  s15_2d.mat
-s36_30.mat = prizadet levi ud =  s15_3d.mat
-s37_10.mat = prizadet levi ud =  s16_1d.mat
-s37_20.mat = prizadet levi ud =  s16_2d.mat
-s37_30.mat = prizadet levi ud =  s16_3d.mat
+
+NOVE:
+s5_10.mat = zdrava =		 s13_1d.mat
+s5_20.mat = zdrava =		 s13_2d.mat
+s5_30.mat = zdrava =		 s13_3d.mat
+
+s11_10.mat = zdrava =		 s14_1d.mat
+s11_20.mat = zdrava =		 s14_2d.mat
+s11_30.mat = zdrava =		 s14_3d.mat
+
+s15_10.mat = zdrava =		 s15_1d.mat
+s15_20.mat = zdrava =		 s15_2d.mat
+s15_30.mat = zdrava =		 s15_3d.mat
+
+s19_10.mat = zdrava =		 s16_1d.mat
+s19_20.mat = zdrava =		 s16_2d.mat
+s19_30.mat = zdrava =		 s16_3d.mat
+
+s20_10.mat = zdrava =		 s17_1d.mat
+s20_20.mat = zdrava =		 s17_2d.mat
+s20_30.mat = zdrava =		 s17_3d.mat
+
+
+s22_10.mat = zdrava =		 s18_1d.mat
+s22_20.mat = zdrava =		 s18_2d.mat
+s22_30.mat = zdrava =		 s18_3d.mat
+
+
+s25_10.mat = zdrava =		 s19_1d.mat
+s25_20.mat = zdrava =		 s19_2d.mat
+s25_30.mat = zdrava =		 s19_3d.mat
+
+
+PACIENTI:
+s27_10.mat = prizadet desni ud = s20_1d.mat
+s27_20.mat = prizadet desni ud = s20_2d.mat		 
+s27_30.mat = prizadet desni ud = s20_3d.mat
+
+s28_10.mat = prizadet desni ud = s21_1d.mat
+s28_20.mat = prizadet desni ud = s21_2d.mat
+s28_30.mat = prizadet desni ud = s21_3d.mat
+
+NOVI - desna
+s29_10.mat = prizadet desni ud = s22_1d.mat
+s29_20.mat = prizadet desni ud = s22_2d.mat
+s29_30.mat = prizadet desni ud = s22_3d.mat
+
+s32_10.mat = prizadet desni ud = s23_1d.mat
+s32_20.mat = prizadet desni ud = s23_2d.mat
+s32_30.mat = prizadet desni ud = s23_3d.mat
+
+s33_10.mat = prizadet desni ud = s24_1d.mat
+s33_20.mat = prizadet desni ud = s24_2d.mat
+s33_30.mat = prizadet desni ud = s24_3d.mat
+
+s34_10.mat = prizadet desni ud = s25_1d.mat
+s34_20.mat = prizadet desni ud = s25_2d.mat
+s34_30.mat = prizadet desni ud = s25_3d.mat
+
+s35_10.mat = prizadet desni ud = s26_1d.mat
+s35_20.mat = prizadet desni ud = s26_2d.mat
+s35_30.mat = prizadet desni ud = s26_3d.mat
+
+
+LEVA 
+
+s36_10.mat = prizadet levi ud =  s27_1d.mat
+s36_20.mat = prizadet levi ud =  s27_2d.mat
+s36_30.mat = prizadet levi ud =  s27_3d.mat
+
+s37_10.mat = prizadet levi ud =  s28_1d.mat
+s37_20.mat = prizadet levi ud =  s28_2d.mat
+s37_30.mat = prizadet levi ud =  s28_3d.mat
+
+NOVI - leva
+
+s38_10.mat = prizadet levi ud =  s29_1d.mat
+s38_20.mat = prizadet levi ud =  s29_2d.mat
+s38_30.mat = prizadet levi ud =  s29_3d.mat
+
+
+
+
+
+
 
