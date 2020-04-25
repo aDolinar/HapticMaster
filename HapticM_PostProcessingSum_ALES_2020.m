@@ -14,7 +14,7 @@ pot = '.\Meritve';%'E:\PHD\3_ROBOT\Znanstveni seminar 2019 Ana\SUROVI PODATKI\ha
 
 % ?tevilo .mat datotek v mapi --> subject_no_folder
 no_damp_iterations = 3; % !!!PAZI!!! 3 velja le v primeru, da imamo za vsak objekt vedno 3 razli?ne damping-e
-no_subjects = 16;
+no_subjects = 29;
 experiments_folder = dir([pot,'/*.mat']); %dir([pot,'/*.mat'])CHANGE
 
 sum_subfolder = numel(experiments_folder) / no_damp_iterations; 
