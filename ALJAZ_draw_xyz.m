@@ -7,7 +7,7 @@ t_norm=1:200;
 for damping_no = 3:3
 %     close all
     
-    for subject_no = 1:16
+    for subject_no = 1:29
         close all
         %for repetition_no = 1:(haptic_data(subject_no).damping(damping_no).data_all(40,1))
             figure(subject_no)
@@ -32,7 +32,7 @@ close all
 damping_no=3;
 
 for subject_no1=1:16
-    for subject_no2=1:16
+    for subject_no2=1:29
         if subject_no1==subject_no2
             euclidDistance(subject_no1,subject_no2)=0;
         else
@@ -63,7 +63,7 @@ kernel=kernel./(sum(kernel))
 length(kernel)
 for target_no=1:16
     close all
-    for subject_no=1:16
+    for subject_no=1:29
         idxStart=1+(target_no-1)*200;
         idxEnd=idxStart+199;
         
@@ -120,7 +120,7 @@ Wn = 20/100;                   % Normalized cutoff frequency
 
 for target_no=1:16
     close all
-    for subject_no=1:16
+    for subject_no=1:29
         idxStart=1+(target_no-1)*200;
         idxEnd=idxStart+199;
         
@@ -152,6 +152,136 @@ for target_no=1:16
         subplot(2,1,2);
         plot([1:length(accZ1f)],accZ1f,[1:length(accZ2f)],accZ2f);
         title("acc Z");
+        legend('repetition 1','repetition 2')
+        text=strcat("subject no: ",num2str(subject_no),", target no: ",num2str(target_no));
+        %text=["subject no: ",num2str(subject_no),", target no: ",num2str(target_no)];
+        sgtitle(text,'FontSize',14);
+        set(gcf, 'Position', get(0, 'Screensize'));
+        %hold off
+    end
+    pause
+end
+%%
+%porazdeljenost pospesevanja putr statistical
+clc
+Wn = 20/100;                   % Normalized cutoff frequency        
+[Fb,Fa]=butter(4,Wn);
+accArrayF=zeros(29,198,32,2); %dimenzije: (subject_no, normalized_time, target_no+16*(repetition-1), 1=y 2=z)
+%calculate stuff
+for target_no=1:16
+    for subject_no=1:29
+        idxStart=1+(target_no-1)*200;
+        idxEnd=idxStart+199;
+        
+        trajY1=haptic_data(subject_no).damping(damping_no).position_y_path(1).U(idxStart:idxEnd);
+        trajZ1=haptic_data(subject_no).damping(damping_no).position_z_path(1).V(idxStart:idxEnd);
+        velY1=diff(trajY1);
+        velZ1=diff(trajZ1);
+        accY1=diff(velY1);
+        accZ1=diff(velZ1);
+        
+        trajY2=haptic_data(subject_no).damping(damping_no).position_y_path(2).U(idxStart:idxEnd);
+        trajZ2=haptic_data(subject_no).damping(damping_no).position_z_path(2).V(idxStart:idxEnd);
+        velY2=diff(trajY2);
+        velZ2=diff(trajZ2);
+        accY2=diff(velY2);
+        accZ2=diff(velZ2);
+        
+        accArrayF(subject_no,:,target_no,1)=filter(Fb,Fa,accY1);
+        accArrayF(subject_no,:,target_no,2)=filter(Fb,Fa,accZ1);
+        accArrayF(subject_no,:,target_no+16,1)=filter(Fb,Fa,accY2);
+        accArrayF(subject_no,:,target_no+16,2)=filter(Fb,Fa,accZ2);
+    end
+end
+%mean
+meanAccArray=mean(accArrayF);
+meanAccArray=reshape(meanAccArray,[198,32,2]);
+%plot stuff
+for target_no=1:16
+    %hold on
+    figure()
+    subplot(2,1,1);
+    plot([1:length(meanAccArray(:,target_no,1))],meanAccArray(:,target_no,1),[1:length(meanAccArray(:,target_no+16,1))],meanAccArray(:,target_no+16,1));
+    title("mean acc Y");
+    legend('repetition 1','repetition 2')
+    subplot(2,1,2);
+    plot([1:length(meanAccArray(:,target_no,2))],meanAccArray(:,target_no,2),[1:length(meanAccArray(:,target_no+16,2))],meanAccArray(:,target_no+16,2));
+    title("mean acc Z");
+    legend('repetition 1','repetition 2')
+    text=strcat("Mean acceleration, target no: ",num2str(target_no));
+    %text=["subject no: ",num2str(subject_no),", target no: ",num2str(target_no)];
+    sgtitle(text,'FontSize',14);
+    set(gcf, 'Position', get(0, 'Screensize'));
+    %hold off
+end
+%%
+%std
+stdAccArray=std(accArrayF);
+stdAccArray=reshape(stdAccArray,[198,32,2]);
+%plot stuff
+for target_no=1:16
+    %hold on
+    figure()
+    subplot(2,1,1);
+    plot([1:length(stdAccArray(:,target_no,1))],stdAccArray(:,target_no,1),[1:length(stdAccArray(:,target_no+16,1))],stdAccArray(:,target_no+16,1));
+    title("std acc Y");
+    legend('repetition 1','repetition 2')
+    subplot(2,1,2);
+    plot([1:length(stdAccArray(:,target_no,2))],stdAccArray(:,target_no,2),[1:length(stdAccArray(:,target_no+16,2))],stdAccArray(:,target_no+16,2));
+    title("std acc Z");
+    legend('repetition 1','repetition 2')
+    text=strcat("Std acceleration, target no: ",num2str(target_no));
+    %text=["subject no: ",num2str(subject_no),", target no: ",num2str(target_no)];
+    sgtitle(text,'FontSize',14);
+    set(gcf, 'Position', get(0, 'Screensize'));
+    %hold off
+end
+%%
+%jerk putr
+clc
+Wn = 20/100;                   % Normalized cutoff frequency        
+[Fb,Fa]=butter(4,Wn);
+
+
+for target_no=1:16
+    close all
+    for subject_no=1:29
+        idxStart=1+(target_no-1)*200;
+        idxEnd=idxStart+199;
+        
+        trajY1=haptic_data(subject_no).damping(damping_no).position_y_path(1).U(idxStart:idxEnd);
+        trajZ1=haptic_data(subject_no).damping(damping_no).position_z_path(1).V(idxStart:idxEnd);
+        velY1=diff(trajY1);
+        velZ1=diff(trajZ1);
+        accY1=diff(velY1);
+        accZ1=diff(velZ1);
+        jerkY1=diff(accY1);
+        jerkZ1=diff(accZ1);
+        
+        trajY2=haptic_data(subject_no).damping(damping_no).position_y_path(2).U(idxStart:idxEnd);
+        trajZ2=haptic_data(subject_no).damping(damping_no).position_z_path(2).V(idxStart:idxEnd);
+        velY2=diff(trajY2);
+        velZ2=diff(trajZ2);
+        accY2=diff(velY2);
+        accZ2=diff(velZ2);
+        
+        jerkY2=diff(accY2);
+        jerkZ2=diff(accZ2);
+        
+        jerkY1f=filter(Fb,Fa,jerkY1);
+        jerkZ1f=filter(Fb,Fa,jerkZ1);
+        jerkY2f=filter(Fb,Fa,jerkY2);
+        jerkZ2f=filter(Fb,Fa,jerkZ2);
+        
+        figure()
+        %hold on
+        subplot(2,1,1);
+        plot([1:length(jerkY1f)],jerkY1f,[1:length(jerkY2f)],jerkY2f);
+        title("jerk Y");
+        legend('repetition 1','repetition 2')
+        subplot(2,1,2);
+        plot([1:length(jerkZ1f)],jerkZ1f,[1:length(jerkZ2f)],jerkZ2f);
+        title("jerk Z");
         legend('repetition 1','repetition 2')
         text=strcat("subject no: ",num2str(subject_no),", target no: ",num2str(target_no));
         %text=["subject no: ",num2str(subject_no),", target no: ",num2str(target_no)];
