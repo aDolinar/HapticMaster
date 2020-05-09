@@ -291,3 +291,17 @@ for target_no=1:16
     end
     pause
 end
+%%
+%test for gradient color plot
+close all
+x=[1:500];
+y=sin(x/(5*pi));
+c=winter(500);
+w=waitbar(0,'working');
+hold on
+for i=[1:500]
+scatter(x(i),y(i),25,'MarkerFaceColor',c(i,:),'MarkerEdgeColor','none')
+waitbar(i/500,w);    
+end
+close(w)
+hold off
