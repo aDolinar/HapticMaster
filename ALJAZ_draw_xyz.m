@@ -18,11 +18,23 @@ for damping_no = 3:3
             ylabel('Distance @ handle [m]')
             xlabel('Normalised time')
             title(['subject = ', int2str(subject_no),', damping = ', int2str(damping_no), ', 2 repetitions '])
+            x=haptic_data(subject_no).damping(damping_no).position_y_path(1).U;
+            y=haptic_data(subject_no).damping(damping_no).position_z_path(1).V;
+            z=linspace(0,16,3199);
+            z=[z,17];
+            figure
+            surf([x(:) x(:)], [y(:) y(:)], [z(:) z(:)], ...  % Reshape and replicate data
+                'FaceColor', 'none', ...    % Don't bother filling faces with color
+                'EdgeColor', 'interp', ...  % Use interpolated color for edges
+                'LineWidth', 2);            % Make a thicker line
+            view(2);   % Default 2-D view
+            colorbar;
             pause
 
         %end
     end
 end
+
 %%
 %evklidska razdalja
 %kar sem dodajal jaz
