@@ -317,3 +317,15 @@ waitbar(i/500,w);
 end
 close(w)
 hold off
+%%
+%colortest
+f=3;
+x=1:f;
+figure
+            surf([x(:) x(:)], [x(:) x(:)], [x(:) x(:)], ...  % Reshape and replicate data
+                'FaceColor', 'none', ...    % Don't bother filling faces with color
+                'EdgeColor', 'interp', ...  % Use interpolated color for edges
+                'LineWidth', 2);            % Make a thicker line
+            view(2);   % Default 2-D view
+            colorbar;
+colormap(jet);
