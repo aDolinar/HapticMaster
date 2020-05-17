@@ -78,8 +78,6 @@ for ii = 1
     
     [p_1,tbl_1,stats_1] = anova1(matrika1');
     [p_2,tbl_2,stats_2] = anova1(matrika2');
-    
-
 end
 
 
